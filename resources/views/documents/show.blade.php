@@ -12,7 +12,7 @@
             
             <span class="px-4 py-2 inline-flex text-sm leading-5 font-bold rounded-full shadow-sm
                 {{ $document->status === 'approved' ? 'bg-green-100 text-green-700 border border-green-200' : ($document->status === 'rejected' ? 'bg-red-100 text-red-700 border border-red-200' : ($document->status === 'pending' ? 'bg-blue-100 text-blue-700 border border-blue-200' : 'bg-yellow-100 text-yellow-800 border border-yellow-200')) }}">
-                Estado: {{ ['draft' => 'Borrador', 'pending' => 'Pendiente', 'approved' => 'Aprobado', 'rejected' => 'Rechazado'][$document->status] ?? ucfirst($document->status) }}
+                {{ __('Estado') }}: {{ __(['draft' => 'Borrador', 'pending' => 'Pendiente', 'approved' => 'Aprobado', 'rejected' => 'Rechazado'][$document->status] ?? ucfirst($document->status)) }}
             </span>
         </div>
     </x-slot>
@@ -32,53 +32,51 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Columna Izquierda (Info y Flujos) -->
                 <div class="space-y-8">
-                    <!-- Información General -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         <div class="p-6">
-                            <h3 class="text-lg font-extrabold text-gray-900 border-b pb-3 mb-4">Metadatos del Documento</h3>
+                            <h3 class="text-lg font-extrabold text-gray-900 border-b pb-3 mb-4">{{ __('Metadatos del Documento') }}</h3>
                             <div class="space-y-4">
                                 <div>
-                                    <p class="text-xs font-bold text-gray-500 uppercase">Descripción</p>
-                                    <p class="text-sm text-gray-800 mt-1">{{ $document->description ?: 'Sin descripción.' }}</p>
+                                    <p class="text-xs font-bold text-gray-500 uppercase">{{ __('Descripción') }}</p>
+                                    <p class="text-sm text-gray-800 mt-1">{{ $document->description ?: __('Sin descripción.') }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-gray-500 uppercase">Propietario</p>
+                                    <p class="text-xs font-bold text-gray-500 uppercase">{{ __('Propietario') }}</p>
                                     <p class="text-sm text-gray-800 mt-1 font-medium">{{ $document->user->name }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-gray-500 uppercase">Fecha de Creación</p>
+                                    <p class="text-xs font-bold text-gray-500 uppercase">{{ __('Fecha de Creación') }}</p>
                                     <p class="text-sm text-gray-800 mt-1">{{ $document->created_at->format('d/m/Y H:i') }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Flujo de Aprobación (Workflows) -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         <div class="p-6">
-                            <h3 class="text-lg font-extrabold text-gray-900 border-b pb-3 mb-4">Flujo de Trabajo (Workflow)</h3>
+                            <h3 class="text-lg font-extrabold text-gray-900 border-b pb-3 mb-4">{{ __('Flujo de Trabajo (Workflow)') }}</h3>
                             
                             <form action="{{ route('documents.status.update', $document) }}" method="POST" class="space-y-4">
                                 @csrf
                                 @method('PATCH')
                                 
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 mb-2">Cambiar Estado a:</label>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">{{ __('Cambiar Estado a:') }}</label>
                                     <select name="status" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
-                                        <option value="draft" {{ $document->status == 'draft' ? 'selected' : '' }}>Borrador (Draft)</option>
-                                        <option value="pending" {{ $document->status == 'pending' ? 'selected' : '' }}>Pendiente de Revisión</option>
+                                        <option value="draft" {{ $document->status == 'draft' ? 'selected' : '' }}>{{ __('Borrador') }}</option>
+                                        <option value="pending" {{ $document->status == 'pending' ? 'selected' : '' }}>{{ __('Pendiente de Revisión') }}</option>
                                         @if(auth()->user()->isReviewer() || auth()->user()->isAdmin())
-                                            <option value="approved" {{ $document->status == 'approved' ? 'selected' : '' }}>Aprobado</option>
-                                            <option value="rejected" {{ $document->status == 'rejected' ? 'selected' : '' }}>Rechazado</option>
+                                            <option value="approved" {{ $document->status == 'approved' ? 'selected' : '' }}>{{ __('Aprobado') }}</option>
+                                            <option value="rejected" {{ $document->status == 'rejected' ? 'selected' : '' }}>{{ __('Rechazado') }}</option>
                                         @endif
                                     </select>
                                 </div>
                                 
                                 <button type="submit" class="w-full bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                                    Actualizar Estado
+                                    {{ __('Actualizar Estado') }}
                                 </button>
                                 @if(!auth()->user()->isReviewer() && !auth()->user()->isAdmin())
-                                    <p class="text-xs text-gray-500 mt-2 text-center">Solo administradores o revisores pueden Aprobar/Rechazar.</p>
+                                    <p class="text-xs text-gray-500 mt-2 text-center">{{ __('Solo administradores o revisores pueden Aprobar/Rechazar.') }}</p>
                                 @endif
                             </form>
                         </div>
@@ -88,39 +86,37 @@
                 <!-- Columna Derecha (Versiones) -->
                 <div class="md:col-span-2 space-y-8">
                     
-                    <!-- Subir Nueva Versión -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         <div class="p-6 bg-indigo-50/50 border-b border-gray-100">
-                            <h3 class="text-lg font-extrabold text-indigo-900">Subir Nueva Versión</h3>
-                            <p class="text-sm text-indigo-700">El documento original no se borra. Se creará una versión v{{ number_format(($document->versions->last()->version ?? 1.0) + 1.0, 1) }}.</p>
+                            <h3 class="text-lg font-extrabold text-indigo-900">{{ __('Subir Nueva Versión') }}</h3>
+                            <p class="text-sm text-indigo-700">{{ __('El documento original no se borra. Se creará una versión') }} v{{ number_format(($document->versions->last()->version ?? 1.0) + 1.0, 1) }}.</p>
                         </div>
                         <div class="p-6">
                             <form action="{{ route('documents.versions.store', $document) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                                 @csrf
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <label for="change_summary" class="block text-sm font-bold text-gray-700 mb-2">Resumen de Cambios <span class="text-red-500">*</span></label>
+                                        <label for="change_summary" class="block text-sm font-bold text-gray-700 mb-2">{{ __('Resumen de Cambios') }} <span class="text-red-500">*</span></label>
                                         <input type="text" name="change_summary" required placeholder="Ej. Corrección de cláusula 3"
                                             class="w-full rounded-lg border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm">
                                     </div>
                                     <div>
-                                        <label for="file" class="block text-sm font-bold text-gray-700 mb-2">Archivo Nuevo <span class="text-red-500">*</span></label>
+                                        <label for="file" class="block text-sm font-bold text-gray-700 mb-2">{{ __('Archivo Nuevo') }} <span class="text-red-500">*</span></label>
                                         <input type="file" name="file" required class="w-full border border-gray-300 p-1.5 rounded-lg text-sm">
                                     </div>
                                 </div>
                                 <div class="flex justify-end">
                                     <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
-                                        Subir Versión
+                                        {{ __('Subir Versión') }}
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
 
-                    <!-- Lista de Versiones -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         <div class="p-6">
-                            <h3 class="text-lg font-extrabold text-gray-900 border-b pb-3 mb-4">Historial de Versiones</h3>
+                            <h3 class="text-lg font-extrabold text-gray-900 border-b pb-3 mb-4">{{ __('Historial de Versiones') }}</h3>
                             
                             <div class="flow-root">
                                 <ul class="-mb-8">
@@ -139,7 +135,7 @@
                                                     <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                                                         <div>
                                                             <p class="text-sm text-gray-500">
-                                                                Subido por <span class="font-medium text-gray-900">{{ $version->uploader->name }}</span>
+                                                                {{ __('Subido por') }} <span class="font-medium text-gray-900">{{ $version->uploader->name }}</span>
                                                             </p>
                                                             <p class="text-sm text-gray-800 font-medium mt-1">"{{ $version->change_summary }}"</p>
                                                         </div>
@@ -148,10 +144,10 @@
                                                             
                                                             <div class="flex gap-2">
                                                                 <button onclick="openPreview('{{ route('documents.preview', $version) }}', '{{ $version->original_name }}')" type="button" class="inline-flex items-center px-3 py-1 border border-gray-300 text-xs font-bold rounded shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
-                                                                    Ver (Preview)
+                                                                    {{ __('Ver (Preview)') }}
                                                                 </button>
                                                                 <a href="{{ route('documents.download', $version) }}" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
-                                                                    Descargar
+                                                                    {{ __('Descargar') }}
                                                                 </a>
                                                             </div>
                                                             @if($version->file_hash)
@@ -168,11 +164,10 @@
                         </div>
                     </div>
 
-                    <!-- Auditoría (Logs) -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                         <div class="p-6">
                             <div class="flex items-center justify-between border-b pb-3 mb-4">
-                                <h3 class="text-lg font-extrabold text-gray-900">Registro de Auditoría (Logs)</h3>
+                                <h3 class="text-lg font-extrabold text-gray-900">{{ __('Registro de Auditoría (Logs)') }}</h3>
                                 <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-bold">Top-Tier</span>
                             </div>
                             
@@ -219,7 +214,7 @@
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
             <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl w-full border border-gray-200">
                 <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
-                    <h3 class="text-lg leading-6 font-bold text-gray-900" id="previewTitle">Previsualización de Documento</h3>
+                    <h3 class="text-lg leading-6 font-bold text-gray-900" id="previewTitle">{{ __('Previsualización de Documento') }}</h3>
                     <button type="button" onclick="closePreview()" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>

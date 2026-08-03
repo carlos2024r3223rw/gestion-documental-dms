@@ -21,8 +21,22 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <!-- Settings Dropdown & Lang Switcher -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6 gap-6">
+                
+                <!-- Language Switcher -->
+                <div class="flex items-center gap-2 text-sm font-medium">
+                    <a href="{{ route('lang.switch', 'es') }}" 
+                    class="{{ app()->getLocale() == 'es' ? 'text-indigo-600 font-bold border-b-2 border-indigo-600' : 'text-slate-400 hover:text-slate-600' }}">
+                    ES 🇪🇸
+                    </a>
+                    <span class="text-slate-300">|</span>
+                    <a href="{{ route('lang.switch', 'en') }}" 
+                    class="{{ app()->getLocale() == 'en' ? 'text-indigo-600 font-bold border-b-2 border-indigo-600' : 'text-slate-400 hover:text-slate-600' }}">
+                    EN 🇺🇸
+                    </a>
+                </div>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">

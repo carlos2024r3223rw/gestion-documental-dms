@@ -11,12 +11,12 @@
             <!-- Header Animado -->
             <div class="flex justify-between items-center mb-8">
                 <div>
-                    <h3 class="text-3xl font-extrabold text-gray-900 tracking-tight">Repositorio Corporativo</h3>
-                    <p class="mt-2 text-sm text-gray-500">Administra, aprueba y controla las versiones de tus documentos.</p>
+                    <h3 class="text-3xl font-extrabold text-gray-900 tracking-tight">{{ __('Repositorio Corporativo') }}</h3>
+                    <p class="mt-2 text-sm text-gray-500">{{ __('Administra, aprueba y controla las versiones de tus documentos.') }}</p>
                 </div>
                 <a href="{{ route('documents.create') }}" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 shadow-lg hover:shadow-indigo-500/50 transform transition hover:-translate-y-1 duration-300">
                     <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    Añadir Documento
+                    {{ __('Añadir Documento') }}
                 </a>
             </div>
 
@@ -36,11 +36,11 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr>
-                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50 rounded-tl-lg">Archivo</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50">Propietario</th>
-                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50">Estado</th>
-                                    <th class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50">Versión</th>
-                                    <th class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50 rounded-tr-lg">Acciones</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50 rounded-tl-lg">{{ __('Archivo') }}</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50">{{ __('Propietario') }}</th>
+                                    <th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50">{{ __('Estado') }}</th>
+                                    <th class="px-6 py-4 text-center text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50">{{ __('Versión') }}</th>
+                                    <th class="px-6 py-4 text-right text-xs font-bold text-gray-500 uppercase tracking-wider bg-gray-50 rounded-tr-lg">{{ __('Acciones') }}</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-100">
@@ -63,7 +63,7 @@
                                         <td class="px-6 py-5 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                             {{ $doc->status === 'approved' ? 'bg-green-100 text-green-800' : ($doc->status === 'rejected' ? 'bg-red-100 text-red-800' : ($doc->status === 'pending' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800')) }}">
-                                            {{ ['draft' => 'Borrador', 'pending' => 'Pendiente', 'approved' => 'Aprobado', 'rejected' => 'Rechazado'][$doc->status] ?? ucfirst($doc->status) }}
+                                            {{ __(['draft' => 'Borrador', 'pending' => 'Pendiente', 'approved' => 'Aprobado', 'rejected' => 'Rechazado'][$doc->status] ?? ucfirst($doc->status)) }}
                                         </span>
                                         </td>
 
@@ -72,7 +72,7 @@
                                         </td>
                                         <td class="px-6 py-5 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="{{ route('documents.show', $doc) }}" class="text-indigo-600 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-lg transition-colors">
-                                                Inspeccionar &rarr;
+                                                {!! __('Inspeccionar &rarr;') !!}
                                             </a>
                                         </td>
                                     </tr>
@@ -82,8 +82,8 @@
                                             <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
-                                            <h3 class="mt-2 text-sm font-medium text-gray-900">Sin documentos</h3>
-                                            <p class="mt-1 text-sm text-gray-500">Aún no se ha subido ningún documento al repositorio.</p>
+                                            <h3 class="mt-2 text-sm font-medium text-gray-900">{{ __('Sin documentos') }}</h3>
+                                            <p class="mt-1 text-sm text-gray-500">{{ __('Aún no se ha subido ningún documento al repositorio.') }}</p>
                                         </td>
                                     </tr>
                                 @endforelse
