@@ -5,13 +5,13 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 bg-gray-50 min-h-screen">
+    <div class="py-12 bg-slate-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-8">
             
             <!-- Tarjetas de Estadísticas -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <!-- Total Documentos -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 transform transition hover:-translate-y-1 hover:shadow-2xl duration-300">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 transform transition hover:-translate-y-1 hover:shadow-md duration-300">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 bg-indigo-100 rounded-lg p-3">
                             <svg class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
@@ -24,7 +24,7 @@
                 </div>
 
                 <!-- Aprobados -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 transform transition hover:-translate-y-1 hover:shadow-2xl duration-300">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 transform transition hover:-translate-y-1 hover:shadow-md duration-300">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 bg-green-100 rounded-lg p-3">
                             <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -37,7 +37,7 @@
                 </div>
 
                 <!-- Pendientes -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 transform transition hover:-translate-y-1 hover:shadow-2xl duration-300">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 transform transition hover:-translate-y-1 hover:shadow-md duration-300">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 bg-blue-100 rounded-lg p-3">
                             <svg class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -50,7 +50,7 @@
                 </div>
 
                 <!-- Rechazados -->
-                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 transform transition hover:-translate-y-1 hover:shadow-2xl duration-300">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 transform transition hover:-translate-y-1 hover:shadow-md duration-300">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 bg-red-100 rounded-lg p-3">
                             <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -64,8 +64,8 @@
             </div>
 
             <!-- Tabla de Documentos Recientes -->
-            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="p-6 border-b border-slate-200 flex justify-between items-center bg-slate-50/50">
                     <h3 class="text-lg font-extrabold text-gray-900">Actividad Reciente</h3>
                     <a href="{{ route('documents.index') }}" class="text-sm font-bold text-indigo-600 hover:text-indigo-900">Ver Todos &rarr;</a>
                 </div>
