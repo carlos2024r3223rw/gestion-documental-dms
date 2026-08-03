@@ -61,11 +61,12 @@
                                             {{ $doc->user->name }}
                                         </td>
                                         <td class="px-6 py-5 whitespace-nowrap">
-                                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full shadow-sm
-                                                {{ $doc->status === 'approved' ? 'bg-green-100 text-green-700 border border-green-200' : ($doc->status === 'rejected' ? 'bg-red-100 text-red-700 border border-red-200' : 'bg-yellow-100 text-yellow-800 border border-yellow-200') }}">
-                                                {{ $doc->status === 'draft' ? 'Borrador' : ucfirst($doc->status) }}
-                                            </span>
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                            {{ $doc->status === 'approved' ? 'bg-green-100 text-green-800' : ($doc->status === 'rejected' ? 'bg-red-100 text-red-800' : ($doc->status === 'pending' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800')) }}">
+                                            {{ ['draft' => 'Borrador', 'pending' => 'Pendiente', 'approved' => 'Aprobado', 'rejected' => 'Rechazado'][$doc->status] ?? ucfirst($doc->status) }}
+                                        </span>
                                         </td>
+
                                         <td class="px-6 py-5 whitespace-nowrap text-center text-sm font-bold text-gray-500 bg-gray-50/50">
                                             v{{ $doc->versions->last()->version ?? '1.0' }}
                                         </td>

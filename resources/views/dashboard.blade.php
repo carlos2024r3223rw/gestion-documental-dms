@@ -91,11 +91,11 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-bold rounded-full shadow-sm
                                             {{ $doc->status === 'approved' ? 'bg-green-100 text-green-700' : ($doc->status === 'rejected' ? 'bg-red-100 text-red-700' : ($doc->status === 'pending' ? 'bg-blue-100 text-blue-700' : 'bg-yellow-100 text-yellow-800')) }}">
-                                            {{ $doc->status === 'draft' ? 'Borrador' : ucfirst($doc->status) }}
+                                            {{ ['draft' => 'Borrador', 'pending' => 'Pendiente', 'approved' => 'Aprobado', 'rejected' => 'Rechazado'][$doc->status] ?? ucfirst($doc->status) }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {{ $doc->created_at->diffForHumans() }}
+                                        {{ $doc->created_at->format('d/m/Y') }}
                                     </td>
                                 </tr>
                             @empty
