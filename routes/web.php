@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('documents', \App\Http\Controllers\DocumentController::class);
     Route::get('documents/download/{version}', [\App\Http\Controllers\DocumentController::class, 'download'])->name('documents.download');
+    Route::get('documents/preview/{version}', [\App\Http\Controllers\DocumentController::class, 'preview'])->name('documents.preview');
     Route::post('documents/{document}/versions', [\App\Http\Controllers\DocumentController::class, 'storeVersion'])->name('documents.versions.store');
     Route::patch('documents/{document}/status', [\App\Http\Controllers\DocumentController::class, 'updateStatus'])->name('documents.status.update');
 });

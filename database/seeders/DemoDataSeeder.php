@@ -29,24 +29,45 @@ class DemoDataSeeder extends Seeder
             ]);
 
             // Versión 1.0
-            $doc->versions()->create([
+            $v1 = $doc->versions()->create([
                 'user_id' => $user->id,
                 'file_path' => 'demo/dummy.pdf', // Archivo falso
                 'original_name' => 'documento_v1.pdf',
                 'version' => '1.0',
                 'change_summary' => 'Carga inicial del documento.',
+                'file_hash' => hash('sha256', 'dummy content ' . rand()),
+                'created_at' => $doc->created_at,
+            ]);
+
+            \App\Models\ActivityLog::create([
+                'document_id' => $doc->id,
+                'user_id' => $user->id,
+                'action' => 'created',
+                'description' => 'Documento y versión 1.0 subida con éxito.',
+                'ip_address' => $faker->ipv4,
                 'created_at' => $doc->created_at,
             ]);
 
             // Algunos tienen versión 2.0
             if (rand(0, 1)) {
+                $v2Date = now()->subDays(rand(1, 5));
                 $doc->versions()->create([
                     'user_id' => $user->id,
                     'file_path' => 'demo/dummy_v2.pdf',
                     'original_name' => 'documento_final_v2.pdf',
                     'version' => '2.0',
                     'change_summary' => 'Se corrigieron observaciones legales.',
-                    'created_at' => now()->subDays(rand(1, 5)),
+                    'file_hash' => hash('sha256', 'dummy content v2 ' . rand()),
+                    'created_at' => $v2Date,
+                ]);
+
+                \App\Models\ActivityLog::create([
+                    'document_id' => $doc->id,
+                    'user_id' => $user->id,
+                    'action' => 'version_uploaded',
+                    'description' => 'Subió una nueva versión: v2.0',
+                    'ip_address' => $faker->ipv4,
+                    'created_at' => $v2Date,
                 ]);
             }
         }

@@ -17,4 +17,9 @@ class Document extends Model
     {
         return $this->hasMany(DocumentVersion::class);
     }
+
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
 }

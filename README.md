@@ -16,6 +16,9 @@ Un Sistema de Gestión Documental (DMS) de grado corporativo desarrollado para c
 *   **🔒 Control de Acceso Basado en Roles (RBAC):** Sistema robusto de permisos (Administrador, Revisor, Usuario) para garantizar que solo el personal autorizado apruebe o rechace documentos.
 *   **🔄 Flujos de Trabajo (Workflows):** Ciclo de vida completo del documento (*Borrador -> Pendiente de Revisión -> Aprobado/Rechazado*).
 *   **📑 Control de Versiones Estricto:** Subida de nuevas versiones (v1.0, v2.0) sin sobreescribir el historial. Trazabilidad completa (quién subió qué y cuándo).
+*   **👁️ Previsualización Integrada:** Visor de PDF incorporado para leer documentos sin necesidad de descargarlos.
+*   **🛡️ Integridad de Archivos (SHA-256):** Generación y almacenamiento automático del Hash criptográfico SHA-256 por cada versión para garantizar la inmutabilidad y autenticidad frente a manipulaciones de terceros.
+*   **🕵️ Logs de Auditoría (Activity Logs):** Trazabilidad corporativa absoluta. Registro automático de quién crea, visualiza, descarga, aprueba o modifica un documento, guardando la marca de tiempo (timestamp) e IP.
 *   **📊 Dashboard Analítico:** Panel de control gerencial con indicadores clave de rendimiento (KPIs) sobre el estado de los documentos.
 *   **💅 UI/UX Premium:** Interfaz de usuario diseñada con Tailwind CSS, ofreciendo una experiencia moderna, responsiva y altamente intuitiva.
 

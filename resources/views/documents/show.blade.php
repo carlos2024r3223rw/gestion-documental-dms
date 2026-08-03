@@ -145,10 +145,58 @@
                                                         </div>
                                                         <div class="text-right text-sm whitespace-nowrap flex flex-col items-end gap-2">
                                                             <time datetime="{{ $version->created_at }}">{{ $version->created_at->format('d/m/Y H:i') }}</time>
-                                                            <a href="{{ route('documents.download', $version) }}" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
-                                                                Descargar ({{ $version->original_name }})
-                                                            </a>
+                                                            
+                                                            <div class="flex gap-2">
+                                                                <button onclick="openPreview('{{ route('documents.preview', $version) }}', '{{ $version->original_name }}')" type="button" class="inline-flex items-center px-3 py-1 border border-gray-300 text-xs font-bold rounded shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none">
+                                                                    Ver (Preview)
+                                                                </button>
+                                                                <a href="{{ route('documents.download', $version) }}" class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-bold rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none">
+                                                                    Descargar
+                                                                </a>
+                                                            </div>
+                                                            @if($version->file_hash)
+                                                                <p class="text-[10px] text-gray-400 font-mono mt-1 w-48 truncate" title="{{ $version->file_hash }}">SHA-256: {{ substr($version->file_hash, 0, 16) }}...</p>
+                                                            @endif
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auditoría (Logs) -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between border-b pb-3 mb-4">
+                                <h3 class="text-lg font-extrabold text-gray-900">Registro de Auditoría (Logs)</h3>
+                                <span class="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded font-bold">Top-Tier</span>
+                            </div>
+                            
+                            <div class="flow-root">
+                                <ul class="-mb-8 max-h-96 overflow-y-auto pr-2">
+                                    @foreach ($document->activityLogs as $log)
+                                        <li>
+                                            <div class="relative pb-5">
+                                                @if (!$loop->last)
+                                                    <span class="absolute top-4 left-3 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                                                @endif
+                                                <div class="relative flex items-start space-x-3">
+                                                    <div>
+                                                        <span class="h-6 w-6 rounded-full bg-gray-200 flex items-center justify-center ring-8 ring-white mt-0.5">
+                                                            <svg class="h-3 w-3 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                                                        </span>
+                                                    </div>
+                                                    <div class="min-w-0 flex-1 py-0">
+                                                        <div class="text-xs text-gray-500">
+                                                            <span class="font-medium text-gray-900">{{ $log->user ? $log->user->name : 'Sistema' }}</span>
+                                                            <span class="text-gray-400"> ({{ $log->ip_address }}) </span>
+                                                            <span class="whitespace-nowrap">{{ $log->created_at->format('d/m/Y H:i:s') }}</span>
+                                                        </div>
+                                                        <p class="text-sm text-gray-800 mt-0.5">{{ $log->description }}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,4 +211,36 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Previsualización -->
+    <div id="previewModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity backdrop-blur-sm" aria-hidden="true" onclick="closePreview()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl w-full border border-gray-200">
+                <div class="bg-gray-50 px-4 py-3 border-b border-gray-200 flex justify-between items-center">
+                    <h3 class="text-lg leading-6 font-bold text-gray-900" id="previewTitle">Previsualización de Documento</h3>
+                    <button type="button" onclick="closePreview()" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <div class="bg-white p-0 h-[70vh]">
+                    <embed id="previewEmbed" src="" type="application/pdf" width="100%" height="100%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPreview(url, title) {
+            document.getElementById('previewTitle').innerText = title;
+            document.getElementById('previewEmbed').src = url;
+            document.getElementById('previewModal').classList.remove('hidden');
+        }
+
+        function closePreview() {
+            document.getElementById('previewModal').classList.add('hidden');
+            document.getElementById('previewEmbed').src = '';
+        }
+    </script>
 </x-app-layout>
