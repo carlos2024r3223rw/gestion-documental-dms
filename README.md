@@ -19,6 +19,7 @@ Un Sistema de Gestión Documental (DMS) de grado corporativo desarrollado para c
 *   **👁️ Previsualización Integrada:** Visor de PDF incorporado para leer documentos sin necesidad de descargarlos.
 *   **🛡️ Integridad de Archivos (SHA-256):** Generación y almacenamiento automático del Hash criptográfico SHA-256 por cada versión para garantizar la inmutabilidad y autenticidad frente a manipulaciones de terceros.
 *   **🕵️ Logs de Auditoría (Activity Logs):** Trazabilidad corporativa absoluta. Registro automático de quién crea, visualiza, descarga, aprueba o modifica un documento, guardando la marca de tiempo (timestamp) e IP.
+*   **🌍 Internacionalización (i18n):** Sistema multi-idioma integrado. Permite alternar entre Inglés y Español (EN/ES) en tiempo real, adaptando instantáneamente toda la interfaz, estados y tablas para usuarios internacionales.
 *   **📊 Dashboard Analítico:** Panel de control gerencial con indicadores clave de rendimiento (KPIs) sobre el estado de los documentos.
 *   **💅 UI/UX Premium:** Interfaz de usuario diseñada con Tailwind CSS, ofreciendo una experiencia moderna, responsiva y altamente intuitiva.
 
