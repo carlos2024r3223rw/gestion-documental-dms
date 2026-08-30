@@ -28,12 +28,12 @@
                 <div class="flex items-center gap-2 text-sm font-medium">
                     <a href="{{ route('lang.switch', 'es') }}" 
                     class="{{ app()->getLocale() == 'es' ? 'text-indigo-600 font-bold border-b-2 border-indigo-600' : 'text-slate-400 hover:text-slate-600' }}">
-                    ES 🇪🇸
+                    ES
                     </a>
                     <span class="text-slate-300">|</span>
                     <a href="{{ route('lang.switch', 'en') }}" 
                     class="{{ app()->getLocale() == 'en' ? 'text-indigo-600 font-bold border-b-2 border-indigo-600' : 'text-slate-400 hover:text-slate-600' }}">
-                    EN 🇺🇸
+                    EN
                     </a>
                 </div>
 
