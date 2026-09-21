@@ -1,94 +1,99 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo">
-</p>
+﻿# 📁 Gestión Documental DMS — Sistema de Control de Documentos Empresariales
 
-# 📂 Sistema de Gestión Documental Corporativo (DMS)
+> Sistema corporativo para la administración, control de versiones y auditoría de documentos sensibles. Diseñado para empresas que necesitan trazabilidad y seguridad en su gestión documental.
 
-![Estado](https://img.shields.io/badge/Estado-Prototipo_Finalizado-success)
-![Framework](https://img.shields.io/badge/Laravel-v11-FF2D20?logo=laravel)
-![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css)
-
-Un Sistema de Gestión Documental (DMS) de grado corporativo desarrollado para cumplir con las exigencias técnicas y de seguridad de licitaciones empresariales. Diseñado para centralizar, controlar y asegurar el flujo de documentos de una organización.
-
-## ✨ Características Principales
-
-*   **🔒 Control de Acceso Basado en Roles (RBAC):** Sistema robusto de permisos (Administrador, Revisor, Usuario) para garantizar que solo el personal autorizado apruebe o rechace documentos.
-*   **🔄 Flujos de Trabajo (Workflows):** Ciclo de vida completo del documento (*Borrador -> Pendiente de Revisión -> Aprobado/Rechazado*).
-*   **📑 Control de Versiones Estricto:** Subida de nuevas versiones (v1.0, v2.0) sin sobreescribir el historial. Trazabilidad completa (quién subió qué y cuándo).
-*   **👁️ Previsualización Integrada:** Visor de PDF incorporado para leer documentos sin necesidad de descargarlos.
-*   **🛡️ Integridad de Archivos (SHA-256):** Generación y almacenamiento automático del Hash criptográfico SHA-256 por cada versión para garantizar la inmutabilidad y autenticidad frente a manipulaciones de terceros.
-*   **🕵️ Logs de Auditoría (Activity Logs):** Trazabilidad corporativa absoluta. Registro automático de quién crea, visualiza, descarga, aprueba o modifica un documento, guardando la marca de tiempo (timestamp) e IP.
-*   **🌍 Internacionalización (i18n):** Sistema multi-idioma integrado. Permite alternar entre Inglés y Español (EN/ES) en tiempo real, adaptando instantáneamente toda la interfaz, estados y tablas para usuarios internacionales.
-*   **📊 Dashboard Analítico:** Panel de control gerencial con indicadores clave de rendimiento (KPIs) sobre el estado de los documentos.
-*   **💅 UI/UX Premium:** Interfaz de usuario diseñada con Tailwind CSS, ofreciendo una experiencia moderna, responsiva y altamente intuitiva.
-
-## 🏗️ Arquitectura Técnica
-
-El sistema está construido bajo el patrón arquitectónico **MVC (Modelo-Vista-Controlador)** utilizando el framework PHP más seguro y moderno del mercado:
-
-*   **Backend:** Laravel 11 (PHP 8.3)
-*   **Base de Datos:** Relacional (MySQL/PostgreSQL) a través de Eloquent ORM.
-*   **Frontend:** Blade Templates + Tailwind CSS + Vite (Hot Module Replacement).
-*   **Autenticación:** Laravel Breeze (Sesiones seguras y encriptación nativa).
-*   **Almacenamiento:** Sistema de archivos privado abstracto (seguridad contra accesos web directos no autorizados).
-
-## 🚀 Instalación y Despliegue (Local)
-
-Si eres un evaluador técnico de la licitación, puedes ejecutar este prototipo en tu entorno local siguiendo estos pasos:
-
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone https://github.com/TU-USUARIO/gestion-documental-dms.git
-    cd gestion-documental-dms
-    ```
-
-2.  **Instalar dependencias del Backend (PHP):**
-    ```bash
-    composer install
-    ```
-
-3.  **Instalar dependencias del Frontend (Node.js):**
-    ```bash
-    npm install
-    npm run build
-    ```
-
-4.  **Configurar Entorno:**
-    *   Copia el archivo `.env.example` a `.env`.
-    *   Configura tus credenciales de base de datos (`DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`).
-    *   Genera la llave de la aplicación:
-        ```bash
-        php artisan key:generate
-        ```
-
-5.  **Migrar y Sembrar la Base de Datos:**
-    Esto creará las tablas y poblará el sistema con datos de prueba realistas.
-    ```bash
-    php artisan migrate --seed
-    php artisan db:seed --class=DemoDataSeeder
-    ```
-
-6.  **Iniciar Servidor Local:**
-    ```bash
-    php artisan serve
-    ```
-    Visita `http://localhost:8000` en tu navegador.
-
-## 👤 Credenciales de Demostración
-
-El seeder inicial crea automáticamente una cuenta de Administrador para evaluar el sistema:
-
-*   **Email:** `admin@admin.com`
-*   **Contraseña:** `password`
-
-## 🛡️ Seguridad Integrada
-
-Este proyecto está diseñado pensando en la seguridad empresarial desde el día cero:
-*   **Protección CSRF** en todos los formularios.
-*   **Sanitización Automática** de inputs mediante validadores estrictos.
-*   **Protección contra inyección SQL** utilizando el ORM Eloquent.
-*   **Archivos Privados:** Los documentos subidos no son accesibles públicamente por URL directa; pasan por un middleware de autorización antes de ser descargados.
+[![Demo en vivo](https://img.shields.io/badge/Demo-Live-brightgreen?style=for-the-badge)](https://gestion-documental-dms-production.up.railway.app/dashboard)
+[![Stack](https://img.shields.io/badge/Stack-PHP%20%7C%20MySQL%20%7C%20Railway-purple?style=for-the-badge&logo=php)](https://php.net)
 
 ---
-*Desarrollado para Licitación Corporativa 2026*
+
+## 🔴 El Problema
+
+La empresa manejaba documentos sensibles sin ningún sistema de control:
+
+- ❌ Documentos críticos guardados en carpetas compartidas sin versionado
+- ❌ Sin auditoría de quién accedió o modificó cada documento
+- ❌ Riesgo de pérdida de información o accesos no autorizados
+- ❌ Sin distinción entre permisos de staff y administración
+
+## ✅ La Solución
+
+Sistema DMS completo con control de acceso por roles y trazabilidad total:
+
+- 🔐 **RBAC** (Role-Based Access Control) — Admin y Staff con permisos diferenciados
+- 📂 **Control de versiones** — historial completo de cambios por documento
+- 🔍 **Búsqueda avanzada** — filtrado por categoría, fecha, autor y estado
+- 📋 **Auditoría completa** — log de accesos, modificaciones y descargas
+- ☁️ **Desplegado en Railway** con CI/CD automático
+
+## 🧠 Reto Técnico Resuelto
+
+El principal reto fue diseñar el **sistema de permisos RBAC** en PHP puro sin framework, garantizando que un usuario Staff no pueda acceder a documentos confidenciales aunque conozca la URL directa. Se implementó verificación de sesión + validación de permisos por middleware en cada endpoint sensible.
+
+---
+
+## 🛠️ Stack Tecnológico
+
+| Área | Tecnología |
+|---|---|
+| Backend | PHP 8.x (sin framework) |
+| Base de datos | MySQL con relaciones normalizadas |
+| Hosting | Railway (cloud PaaS) |
+| Auth | Sistema de sesiones PHP + bcrypt |
+| Frontend | Blade templates, CSS, JavaScript vanilla |
+
+---
+
+## 🚀 Instalación Local
+
+```bash
+git clone https://github.com/carlos2024r3223rw/gestion-documental-dms.git
+cd gestion-documental-dms
+
+# Configurar la base de datos
+# 1. Crear una base de datos MySQL
+# 2. Importar el esquema
+mysql -u root -p nombre_db < database/schema.sql
+
+# Configurar las variables de entorno
+cp .env.example .env
+# Editar .env con tus credenciales de DB
+```
+
+---
+
+## 🔑 Acceso Demo (Producción)
+
+| Rol | Email | Contraseña |
+|---|---|---|
+| Administrador | `jefe@admin.com` | `password123` |
+| Staff | `user@admin.com` | `password123` |
+
+🔗 **Demo:** https://gestion-documental-dms-production.up.railway.app/dashboard
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+gestion-documental-dms/
+├── app/
+│   ├── controllers/       # Lógica de negocio (DocumentController, AuthController)
+│   ├── models/            # Modelos de datos (Document, User, AuditLog)
+│   ├── middleware/        # Verificación de sesión y permisos RBAC
+│   └── views/             # Templates Blade
+├── database/
+│   └── schema.sql         # Estructura completa de la BD
+├── public/                # Entry point, assets CSS/JS
+└── config/                # Configuración de BD y constantes
+```
+
+---
+
+## 👤 Autor
+
+**Carlos Manuel Martínez Lima** — Full Stack Developer · Especialista SaaS & eCommerce
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-webcarlos--jet.vercel.app-blue?style=flat-square)](https://webcarlos-jet.vercel.app)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/carlos-manuel-martinez-lima-ba238a1a9/)
+[![Email](https://img.shields.io/badge/Email-cm7887575%40gmail.com-red?style=flat-square&logo=gmail)](mailto:cm7887575@gmail.com)
